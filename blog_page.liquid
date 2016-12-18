@@ -1,0 +1,46 @@
+<div id="content">
+  <div class="container background-white">
+    <div class="row margin-vert-30">
+      <div class="col-md-12">
+        {% for record in website_data.blog_records %}
+          <div class="blog-post padding-bottom-20">
+            <div class="blog-item-header">
+              <h2>
+                <a href="{{ 'blog/' | append: record.slug | link_to: website_data.link_object }}">{{ record.title }}</a>
+              </h2>
+              <div class="clearfix"></div>
+              <div class="blog-post-date">
+                <a href="#">
+                  {{record.created_at | date: "%d %b, %Y"}}
+                </a>
+              </div>
+            </div>
+            <div class="blog">
+              <div class="clearfix"></div>
+              <div class="blog-post-body row margin-top-15">
+                {% if record.cover %}
+                  <div class="col-md-5">
+                    <img src="{{ record.image | attachment_url: 'big' }}" alt="{{record.all_text}}" class="cover" />
+                  </div>
+                  <div class="col-md-7">
+                    <p>
+                      {{record.text | truncate: 300 }}
+                    </p>
+                    <a href="{{ 'blog/' | append: record.slug | link_to: website_data.link_object }}" class="btn btn-primary">Read More</a>
+                  </div>
+                {% else %}
+                  <div class="col-md-12">
+                    <p>
+                      {{record.text | truncate: 300 }}
+                    </p>
+                    <a href="{{ 'blog/' | append: record.slug | link_to: website_data.link_object }}" class="btn btn-primary">Read More</a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

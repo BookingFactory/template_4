@@ -1,0 +1,68 @@
+<div id="base">
+  <div class="container bottom-border padding-vert-30">
+    <div class="row">
+      {% for footer in website_data.footers %}
+        <div class="col-md-4">
+          <h3>
+            {{footer.title}}
+          </h3>
+          {{footer.text}}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<div class="background-grey" id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6" id="footermenu">
+        <ul class="list-unstyled list-inline">
+          {% for link in website_data.footer_links %}
+            <li>
+              {% if link.category == 'Predefined Link' %}
+                {% if link.value == 'home' %}
+                  <a href="{{ '' | link_to: website_data.link_object }}"> {{link.title}} </a>
+                {% elsif link.value == 'features' %}
+                  <a href="{{ '#features' | link_to: website_data.link_object }}">{{link.title}}</a>
+                {% elsif link.value == 'contacts' %}
+                  <a href="{{ '#contact' | link_to: website_data.link_object }}">{{link.title}}</a>
+                {% elsif link.value == 'faq' %}
+                  <a href="{{ '#faq' | link_to: website_data.link_object }}">{{link.title}}> </a>
+                {% elsif link.value == 'about'%}
+                  <a href="{{ '/about' | link_to: website_data.link_object }}">{{link.title}}> </a>
+                {% elsif link.value == 'blog' %}
+                  <a href="{{ '/blog' | link_to: website_data.link_object }}"> {{link.title}} </a>
+                {% elsif link.value == 'terms-and-conditions'%}
+                  <a href="{{ '/terms-and-conditions' | link_to: website_data.link_object }}">{{link.title}} </a>
+                {% elsif link.value == 'privacy-policy' %}
+                  <a href="{{ '/privacy-policy' | link_to: website_data.link_object }}">{{link.title}}</a>
+                {% elsif link.value == 'booking' %}
+                  <a href="{{ '/book' | link_to: website_data.link_object }}" class="booking-form-link"></a>
+                {% endif %}
+              {% elsif link.category == 'Custom Page Link' %}
+                <a href="{{ link.value | link_to: website_data.link_object }}">{{link.title}}</a>
+              {% elsif link.category == 'Blog Record Link' %}
+                <a href="{{ link.value | link_to: website_data.link_object }}"> {{link.title}} </a>
+              {% elsif link.category == 'Room Page Link' %}
+                <a href="{{ link.value | link_to: website_data.link_object }}">{{link.title}}</a>
+              {% else %}
+                <a href="{{ link.value | link_to: website_data.link_object }}">{{link.title}}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="col-md-6" id="copyright">
+        <p class="pull-right">
+          &copy;
+          {{ 'now' | date: '%Y' }}
+          {{website_data.hotel_name}}
+          Hotel Website Powered by
+          <a href="http://thebookingfactory.com">
+            thebookingfactory.com
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

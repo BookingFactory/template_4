@@ -1,0 +1,90 @@
+<div id="content">
+  <div class="container background-white">
+    <div class="row margin-vert-30">
+      <div class="col-md-12">
+        <div id="map-canvas" style="height:300px;"></div>
+        {% if website_data.map_center_lat and website_data.map_center_lng %}
+          <script>
+            var zoom = {{website_data.map_zoom_level}}
+            var lat = {{website_data.map_center_lat}}
+            var lng = {{website_data.map_center_lng}}
+            function initialize() {
+              var myOptions = {
+                  zoom: zoom,
+                  center: new google.maps.LatLng(lat, lng),
+                  mapTypeId: google.maps.MapTypeId.ROADMAP,
+                  scrollwheel: false
+              }
+              map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+
+              var marker = new google.maps.Marker({
+                  map: map,
+                  position: new google.maps.LatLng(lat, lng)
+              });
+            }
+
+            function loadScript() {
+              var script = document.createElement('script');
+              script.type = 'text/javascript';
+              script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
+                  '&callback=initialize&key=AIzaSyCxqPAlL6tmp-Wny3tC0e_byl-jOxzu_QA';
+              document.body.appendChild(script);
+            }
+
+            loadScript();
+          </script>
+        {% endif %}
+      </div>
+    </div>
+    <div class="row margin-vert-30">
+      <div class="col-md-12">
+        <div class="headline">
+          <h2>Contact Form</h2>
+        </div>
+        <form action="/send_email" method="post" id="contact-form">
+          <input name="part_a" type="hidden" value="{{website_data.rand_a}}"></input>
+          <input name="part_b" type="hidden" value="{{website_data.rand_b}}"></input>
+          <div class="row">
+            <div class="col-md-4">
+              <label>Name</label>
+              <div class="row margin-bottom-20">
+                <div class="col-md-12 col-md-offset-0">
+                  <input class="form-control" name="name" type="text"></input>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label>Email</label>
+              <div class="row margin-bottom-20">
+                <div class="col-md-12 col-md-offset-0">
+                  <input class="form-control" name="email" type="email"></input>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label>
+                {{website_data.rand_a}} + {{website_data.rand_b}} = ...
+              </label>
+              <div class="row margin-bottom-20">
+                <div class="col-md-12 col-md-offset-0">
+                  <input class="form-control" name="answer" type="number"></input>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <label>Message</label>
+              <div class="row margin-bottom-20">
+                <div class="col-md-12 col-md-offset-0">
+                  <textarea class="form-control" name="message" rows="8"></textarea>
+                </div>
+              </div>
+              <p>
+                <button class="btn btn-primary" type="submit">Send Message</button>
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

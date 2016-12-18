@@ -1,0 +1,210 @@
+<div class="bottom-border-shadow hidden-xs" id="slideshow">
+  <div class="container no-padding background-white bottom-border">
+    <div class="row">
+      <div class="carousel slide" data-ride="carousel" id="carousel-example">
+        <ol class="carousel-indicators">
+          {% for photo in website_data.hotel_photos %}
+            {% if forloop.index == 1 %}
+            <li class="active" data-slide-to="{{forloop.index}}" data-target="#carousel-example">
+            {% else %}
+            <li data-slide-to="{{forloop.index}}" data-target="#carousel-example">
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ol>
+        <div class="clearfix"></div>
+        <div class="carousel-inner">
+          {% for photo in website_data.hotel_photos %}
+            {% if forloop.index == 1 %}
+            <div class="active item">
+            {% else %}
+            <div class="item">
+            {% endif %}
+            <img src="{{photo.image | attachment_url: 'big' }}" />
+            </div>
+          {% endfor %}
+        </div>
+        <a class="left carousel-control" data-slide="prev" href="#carousel-example">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" data-slide="next" href="#carousel-example">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Insiders-->
+{% if website_data.membership_active and website_data.membership_placement == 'top' %}
+  <div class="bottom-border-shadow" id="insiders">
+    <div class="container bottom-border">
+      <div class="insiders" style="background: {{website_data.membership_description_color}}; background: -moz-linear-gradient(left, {{website_data.membership_description_color}} 0%, {{website_data.membership_description_color}} 50%, {{website_data.membership_form_color}} 50%, {{website_data.membership_form_color}} 100%); background: -webkit-linear-gradient(left, {{website_data.membership_form_color}} 0%,{{website_data.membership_description_color}} 50%,{{website_data.membership_form_color}} 50%,{{website_data.membership_form_color}} 100%); background: linear-gradient(to right, {{website_data.membership_description_color}} 0%,{{website_data.membership_description_color}} 50%,{{website_data.membership_form_color}} 50%,{{website_data.membership_form_color}} 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{{website_data.membership_description_color}}', endColorstr='{{website_data.membership_form_color}}',GradientType=1 );">
+        <div class="container"></div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<!-- Content -->
+<div class="bottom-border-shadow" id="content">
+  <div class="container background-white bottom-border">
+    <div class="row margin-vert-30">
+      <div class="col-md-6">
+        {{website_data.text_area}}
+      </div>
+      <div class="col-md-6">
+        <h3 class="padding-vert-10">
+          {{website_data.features_title}}
+        </h3>
+        {% if website_data.features_section_description %}
+          {{website_data.features_section_description}}
+        {% endif %}
+        <ul class="without-tick animate fadeInRight features">
+          {% for feature in website_data.features %}
+            <li>
+              <i class="fa fa-{{feature.icon}}"></i>
+                {{feature.title}}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% if website_data.membership_active and website_data.membership_placement == 'middle' %}
+  <div class="bottom-border-shadow" id="insiders">
+    <div class="container bottom-border">
+      <div class="insiders" style="background: {{website_data.membership_description_color}}; background: -moz-linear-gradient(left, {{website_data.membership_description_color}} 0%, {{website_data.membership_description_color}} 50%, {{website_data.membership_form_color}} 50%, {{website_data.membership_form_color}} 100%); background: -webkit-linear-gradient(left, {{website_data.membership_form_color}} 0%,{{website_data.membership_description_color}} 50%,{{website_data.membership_form_color}} 50%,{{website_data.membership_form_color}} 100%); background: linear-gradient(to right, {{website_data.membership_description_color}} 0%,{{website_data.membership_description_color}} 50%,{{website_data.membership_form_color}} 50%,{{website_data.membership_form_color}} 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{{website_data.membership_description_color}}', endColorstr='{{website_data.membership_form_color}}',GradientType=1 );">
+        <div class="container"></div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<!-- Portfolio -->
+<div class="bottom-border-shadow" id="portfolio">
+  <div class="container bottom-border">
+    <div class="row padding-top-20">
+      <ul class="portfolio-group">
+
+        {% for room in website_data.rooms %}
+          {% if room.visible == true and room.room_type.photos.size > 0 %}
+            <li class="portfolio-item col-md-4 margin-bottom-40">
+              <a href="{{room.slug | link_to: website_data.link_object}}"
+                <figure class="animate fadeIn">
+                  <img src="{{ room.room_type.photos.first.image | attachment_url: 'medium' }}" />
+                  <figcaption>
+                    <h3>
+                      {{room.name}}
+                    </h3>
+                    <span>
+                      {{room.introduction}}
+                    </span>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+        {% for room in website_data.custom_rooms %}
+          {% if room.visible == true and room.website_custom_room_photos.size > 0 %}
+            <li class="portfolio-item col-md-4 margin-bottom-40">
+              <a href="{{ room.slug | link_to: website_data.link_object }}">
+                <figure class="animate fadeIn">
+                  <img src="{{room.website_custom_room_photos.first.image | attachment_url: 'medium' }}" />
+                  <figcaption>
+                    <h3>
+                      {{room.title}}
+                    </h3>
+                    <span>
+                      {{room.introduction}}
+                    </span>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonials -->
+{% if website_data.testimonials.size > 0 %}
+  <div class="bottom-border-shadow" id="testimonials">
+    <div class="container bottom-border">
+      <div class="row padding-top-40">
+        <div class="col-md-12">
+          <div class="carousel slide testimonials" id="testimonials1">
+            {% if website_data.testimonials.size > 1 %}
+              <ol class="carousel-indicators">
+                {% for testimonial in website_data.testimonials %}
+                  {% if forloop.index0 == 0 %}
+                    <li class="active" data-slide-to="{{forloop.index0}}" data-target="#testimonials-rotate">
+                  {% else %}
+                    <li data-slide-to="{{forloop.index0}}" data-target="#testimonials-rotate">
+                  {% endif %}
+                  </li>
+                {% endfor %}
+              </ol>
+            {% endif %}
+            <div class="carousel-inner">
+              {% for testimonial in website_data.testimonials %}
+                {% if forloop.index == 1 %}
+                  <div class="active item">
+                {% else %}
+                  <div class="item">
+                {% endif %}
+                  <div class="col-md-12">
+                    <p>
+                      {{testimonial.body}}
+                    </p>
+                    <div class="testimonial-info">
+                      <span class="testimonial-author">
+                        {{testimonial.name}}
+                        <em>
+                          <a href="{{testimonial.link}}" target="_blank">
+                            {{ testimonial.link}}
+                          </a>
+                        </em>
+                      </span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% if website_data.testimonials.size > 1 %}
+            <div class="testimonials-arrows pull-right">
+              <a class="left" data-slide="prev" href="#testimonials1">
+                <span class="fa fa-arrow-left"></span>
+              </a>
+              <a class="right" data-slide="next" href="#testimonials1">
+                <span class="fa fa-arrow-right"></span>
+              </a>
+              <div class="clearfix"></div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% if website_data.membership_active and website_data.membership_placement == 'bottom' %}
+  <div class="bottom-border-shadow" id="insiders">
+    <div class="container bottom-border">
+      <div class="insiders" style="background: {{website_data.membership_description_color}}; background: -moz-linear-gradient(left, {{website_data.membership_description_color}} 0%, {{website_data.membership_description_color}} 50%, {{website_data.membership_form_color}} 50%, {{website_data.membership_form_color}} 100%); background: -webkit-linear-gradient(left, {{website_data.membership_form_color}} 0%,{{website_data.membership_description_color}} 50%,{{website_data.membership_form_color}} 50%,{{website_data.membership_form_color}} 100%); background: linear-gradient(to right, {{website_data.membership_description_color}} 0%,{{website_data.membership_description_color}} 50%,{{website_data.membership_form_color}} 50%,{{website_data.membership_form_color}} 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{{website_data.membership_description_color}}', endColorstr='{{website_data.membership_form_color}}',GradientType=1 );">
+        <div class="container"></div>
+      </div>
+    </div>
+  </div>
+{% endif %}

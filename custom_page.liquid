@@ -1,0 +1,24 @@
+<div id="content">
+  <div class="container background-white">
+    <div class="row margin-vert-30">
+      <div class="col-md-12">
+        <div class="row">
+          {% if page.website_page_photos.size > 0 %}
+            <div class="col-md-7">
+              {{page.content}}
+            </div>
+            <div class="col-md-5">
+              {% for photo in page.website_page_photos %}
+                <img src="{{photo.image | attachment_url: 'public_big'}}" class="about-photo" />
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="col-md-12">
+              {{page.content}}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div id="content">
+  <div class="container background-white">
+    <div class="row margin-vert-30">
+      <div class="col-md-12">
+        <h2>
+          {{number.name}}
+        </h2>
+        <div class="row">
+          <div class="col-md-6 animate fadeIn">
+            {% if number.room_type.photos.size > 0 %}
+              <img src="{{ number.room_type.photos.first.image | attachment_url: 'public_big' }}" />
+            {% endif %}
+          </div>
+          <div class="col-md-6 margin-bottom-10 animate fadeInRight">
+            {% unless number.description == nil %}
+              <p>
+                {{number.description}}
+              </p>
+            {% endunless %}
+            {% if number.room_type.facilities.size > 0 %}
+              <strong>Room facilities</strong>
+              <ul class="facilities without-tick">
+                {% for facility in number.room_type.facilities %}
+                  <li>
+                    {% if facility.icon %}
+                      <i class="fa-{{facility.icon}} fa"></i>
+                    {% else %}
+                      <i class="fa-circle fa"></i>
+                    {% endif %}
+                    {{ facility.title | get_translation: website_data.id, website_data.lang }}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% if website_data.booking_link == '' %}
+              <a href="{{ '/book' | link_to: website_data.link_object }}" class="btn btn-default btn-normal btn-inline booking-form-link btn-from-top">Book Now</a>
+            {% else %}
+              <a href="{{website_data.booking_link}}" class="btn btn-default btn-normal btn-inline booking-form-link btn-from-top">Book Now</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

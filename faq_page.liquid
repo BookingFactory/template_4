@@ -1,0 +1,43 @@
+<div id="content">
+  <div class="container background-white">
+    <div class="row margin-vert-30">
+      <div class="col-md-12">
+        <h2>
+          {{website_data.faq_title}}
+        </h2>
+        {% if website_data.faq_section_description %}
+          {{website_data.faq_section_description}}
+        {% endif %}
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tab-content">
+            <div class="tab-pane active in fade" id="faq">
+              <div class="panel-group" id="accordion">
+                {% for question in website_data.questions limit: 5, offset: 0 %}
+                  <div class="panel panel-default panel-faq">
+                    <div class="panel-heading">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#faq-sub">
+                        <h4 class="panel-title">
+                          {{question.question}}
+                          <span class="pull-right">
+                            <i class="glyphicon glyphicon-plus"></i>
+                          </span>
+                        </h4>
+                      </a>
+                    </div>
+                    <div class="panel-collapse collapse" id="faq-sub">
+                      <div class="panel-body">
+                        {{question.answer}}
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

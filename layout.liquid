@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      {{website_data.page_title}}
+      {%  if record and record.title %}
+        : {{record.title}}
+      {%  elsif page and page.title %}
+        : {{page.title}}
+      {%  elsif room and room.title %}
+        : {{room.title}}
+      {%  endif %}
+    </title>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    {%  if record and record.meta_description %}
+      <meta content="{{recrod.meta_description}}" name="description"/>
+    {%  elsif page and page.meta_description %}
+      <meta content="{{page.meta_description}}" name="description"/>
+    {%  elsif room and room.meta_description %}
+      <meta content="{{room.meta_description}}" name="description" />
+    {%  else %}
+      <meta content="{{website_data.page_description}}" name="description" />
+    {%  endif %}
+
+    <meta name="engine" content="new" />
+    <meta content="{{website_data.page_keywords}}" name="keywords"/>
+    <meta content="en_UK" property="og:locale"/>
+    <meta content="website" property="og:type"/>
+    <meta content="{{website_data.page_title}}" property="og:title"/>
+    <meta content="{{website_data.page_description}}" property="og:description"/>
+    <meta content="{{website_data.page_title}}" property="og:site_name"/>
+
+    <link rel="stylesheet" href="{{ '/css/template.css' | file_url: website_data.template }}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"></link>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css"></link>
+    {% if website_data.brand_color %}
+      <style>
+        a {
+          color: {{website_data.brand_color}};
+        }
+        #hornav .container,
+        .bottom-border{
+          box-shadow: 0 -4px 0 {{website_data.brand_color}} inset, 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        #hornav ul#hornavmenu > li > a:hover, #hornav ul#hornavmenu > li > span:hover, #hornav ul#hornavmenu > li > a.active, #hornav ul#hornavmenu > li > span.active, #hornav ul#hornavmenu > li > a.current, #hornav ul#hornavmenu > li > span.current{
+          background-color:{{website_data.brand_color}};
+        }
+      </style>
+    {% endif %}
+  </head>
+  <body>
+    {% include 'mobile_navigation' %}
+    <main id="panel">
+      {% if website_data.mobile_menu_fixed == true %}
+        <div class="navbar-fixed-top row xs-header visible-xs-block hidden-sm hidden-md hidden-lg">
+      {% else %}
+        <div class="row xs-header visible-xs-block hidden-sm hidden-md hidden-lg">
+      {% endif %}
+        <div class="col-xs-8">
+          <div class="row-fluid">
+            <div class="col-xs-4 text-center small-top-btn">
+              <button class="open-menu">
+                <i class="fa fa-bars"></i>
+                Menu
+              </button>
+            </div>
+            <div class="col-xs-4 text-center small-top-btn">
+              <a href="tel:{{website_data.phone_number}}">
+                <i class="fa fa-phone"></i>
+                Call
+              </a>
+            </div>
+            <div class="col-xs-4 text-center small-top-btn">
+              <a href="{{ '/contacts' | link_to: website_data.link_object }}"
+                <i class="fa fa-map-marker"></i>
+                Map
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-4 text-center reservation">
+          {% if website_data.booking_link == nil or website_data.booking_link == '' %}
+            <a href="{{ '/book' | link_to: website_data.link_object }}" class="reservation booking-form-link" style="background-color: {{website_data.booking_button_color}}">
+              <i class="fa fa-calendar"></i>
+              Reservation
+            </a>
+          {% else %}
+            <a href="{{website_data.booking_link}}" class="reservation" style="background-color: {{website_data.booking_button_color}}"
+              <i class="fa fa-calendar"></i>
+              Reservation
+            </a>
+          {% endif %}
+        </div>
+      </div>
+      {% if website_data.mobile_menu_fixed == true %}
+        <div class="fixed-header-padded visible-xs-block hidden-sm hidden-md hidden-lg"></div>
+      {% endif %}
+      <div id="body-bg">
+        {% include 'header' %}
+        {{content}}
+        {% include 'footer' %}
+      </div>
+      {% include 'booking_form' %}
+    </main>
+    <script type="text/javascript" async src="{{ '/js/template.js' | file_url: website_data.template }}"> </script>
+  </body>
+</html>

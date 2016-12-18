@@ -1,0 +1,25 @@
+<div id="content">
+  <div class="container background-white">
+    <div class="row margin-vert-30">
+      <div class="col-md-12">
+        <h2>
+          {{room.title}}
+        </h2>
+        <div class="row">
+          <div class="col-md-6 animate fadeIn">
+            {% if room.website_custom_room_photos.size > 0 %}
+              <img src="{{ room.website_custom_room_photos.first.image | attachment_url: 'public_big'}}" />
+            {% endif %}
+          </div>
+          <div class="col-md-6 margin-bottom-10 animate fadeInRight">
+            {% unless room.description == nil %}
+              <p>
+                {{room.description}}
+              </p>
+            {% endunless %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
