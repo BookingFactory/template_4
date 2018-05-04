@@ -41,7 +41,7 @@
         <div class="headline">
           <h2>Contact Form</h2>
         </div>
-        <form action="/send_email" method="post" id="contact-form">
+        <form id="contact-form" method="POST" action="{{ "/send_mail" | link_to: website_data.link_object }}">
           <input name="part_a" type="hidden" value="{{website_data.rand_a}}"></input>
           <input name="part_b" type="hidden" value="{{website_data.rand_b}}"></input>
           <div class="row">
