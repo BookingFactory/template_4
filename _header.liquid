@@ -2,12 +2,12 @@
   <div class="container no-padding">
     <div class="row hidden-xs">
       <div class="col-sm-6 padding-vert-5">
-        <strong>Phone:</strong>
+        <strong>{{ 'Phone' | t: website_data.lang }}:</strong>
         &nbsp;
         {{website_data.phone_number}}
       </div>
       <div class="col-sm-6 text-right padding-vert-5">
-        <strong>Email:</strong>
+        <strong>{{ 'Email' | t: website_data.lang }}:</strong>
         &nbsp;
         {{website_data.email_address}}
       </div>

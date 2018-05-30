@@ -39,14 +39,14 @@
     <div class="row margin-vert-30">
       <div class="col-md-12">
         <div class="headline">
-          <h2>Contact Form</h2>
+          <h2>{{ 'Get In Touch' | t: website_data.lang }}</h2>
         </div>
         <form id="contact-form" method="POST" action="{{ "/send_mail" | link_to: website_data.link_object }}">
           <input name="part_a" type="hidden" value="{{website_data.rand_a}}"></input>
           <input name="part_b" type="hidden" value="{{website_data.rand_b}}"></input>
           <div class="row">
             <div class="col-md-4">
-              <label>Name</label>
+              <label>{{ 'Name' | t: website_data.lang }}</label>
               <div class="row margin-bottom-20">
                 <div class="col-md-12 col-md-offset-0">
                   <input class="form-control" name="name" type="text"></input>
@@ -54,7 +54,7 @@
               </div>
             </div>
             <div class="col-md-4">
-              <label>Email</label>
+              <label>{{ 'Email' | t: website_data.lang }}</label>
               <div class="row margin-bottom-20">
                 <div class="col-md-12 col-md-offset-0">
                   <input class="form-control" name="email" type="email"></input>
@@ -72,14 +72,14 @@
               </div>
             </div>
             <div class="col-md-12">
-              <label>Message</label>
+              <label>{{ 'Message' | t: website_data.lang }}</label>
               <div class="row margin-bottom-20">
                 <div class="col-md-12 col-md-offset-0">
                   <textarea class="form-control" name="message" rows="8"></textarea>
                 </div>
               </div>
               <p>
-                <button class="btn btn-primary" type="submit">Send Message</button>
+                <button class="btn btn-primary" type="submit">{{ 'Send Message' | t: website_data.lang }}</button>
               </p>
             </div>
           </div>
