@@ -45,7 +45,7 @@
           <input name="part_a" type="hidden" value="{{website_data.rand_a}}"></input>
           <input name="part_b" type="hidden" value="{{website_data.rand_b}}"></input>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label>{{ 'Name' | t: website_data.lang }}</label>
               <div class="row margin-bottom-20">
                 <div class="col-md-12 col-md-offset-0">
@@ -53,21 +53,11 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label>{{ 'Email' | t: website_data.lang }}</label>
               <div class="row margin-bottom-20">
                 <div class="col-md-12 col-md-offset-0">
                   <input class="form-control" name="email" type="email"></input>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <label>
-                {{website_data.rand_a}} + {{website_data.rand_b}} = ...
-              </label>
-              <div class="row margin-bottom-20">
-                <div class="col-md-12 col-md-offset-0">
-                  <input class="form-control" name="answer" type="number"></input>
                 </div>
               </div>
             </div>
@@ -78,9 +68,12 @@
                   <textarea class="form-control" name="message" rows="8"></textarea>
                 </div>
               </div>
-              <p>
+            </div>
+            <div class="col-md-6">
+              <div class="g-recaptcha" data-sitekey="6LfJKIoUAAAAAESIKCuCb-QBRSsO5q2jhXTEZ73I"></div>
+            </div>
+            <div class="col-md-6 text-right">
                 <button class="btn btn-primary" type="submit">{{ 'Send Message' | t: website_data.lang }}</button>
-              </p>
             </div>
           </div>
         </form>
