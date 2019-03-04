@@ -11,6 +11,8 @@
         : {{room.title}}
       {%  endif %}
     </title>
+    <link rel="shortcut icon" href="{{ website_data.favicon | attachment_url: 'default' }}" type="image/x-icon"/>
+
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     {%  if record and record.meta_description %}
       <meta content="{{recrod.meta_description}}" name="description"/>
