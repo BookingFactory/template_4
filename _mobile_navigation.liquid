@@ -165,6 +165,10 @@
                         </li>
                       {% endif %}
                     </li>
+                  {% else %}
+                    <li>
+                      <a href="{{ link.value | link_to: website_data.link_object }}">{{link.title}}</a>
+                    </li>
                   {% endif %}
                 {% elsif link.category == 'Custom Room Page' %}
                   <li>
